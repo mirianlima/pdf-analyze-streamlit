@@ -200,19 +200,24 @@ def main():
     # Use RecursiveCharacterTextSplitter as the default and only text splitter
     splitter_type = "RecursiveCharacterTextSplitter"
 
-    if 'openai_api_key' not in st.session_state:
-        openai_api_key = st.text_input(
-            'Please enter your OpenAI API key or [get one here](https://platform.openai.com/account/api-keys)', value="", placeholder="Enter the OpenAI API key which begins with sk-")
-        if openai_api_key:
-            st.session_state.openai_api_key = openai_api_key
-            os.environ["OPENAI_API_KEY"] = openai_api_key
-        else:
-            #warning_text = 'Please enter your OpenAI API key. Get yours from here: [link](https://platform.openai.com/account/api-keys)'
-            #warning_html = f'<span>{warning_text}</span>'
-            #st.markdown(warning_html, unsafe_allow_html=True)
-            return
-    else:
-        os.environ["OPENAI_API_KEY"] = st.session_state.openai_api_key
+    # if 'openai_api_key' not in st.session_state:
+    #     openai_api_key = st.text_input(
+    #         'Please enter your OpenAI API key or [get one here](https://platform.openai.com/account/api-keys)', value="", placeholder="Enter the OpenAI API key which begins with sk-")
+    #     if openai_api_key:
+    #         st.session_state.openai_api_key = openai_api_key
+    #         os.environ["OPENAI_API_KEY"] = openai_api_key
+    #     else:
+    #         #warning_text = 'Please enter your OpenAI API key. Get yours from here: [link](https://platform.openai.com/account/api-keys)'
+    #         #warning_html = f'<span>{warning_text}</span>'
+    #         #st.markdown(warning_html, unsafe_allow_html=True)
+    #         return
+    # else:
+        # os.environ["OPENAI_API_KEY"] = st.session_state.openai_api_key
+    
+    st.session_state.openai.api_type = "azure"
+    st.session_state.openai.api_version = "2023-03-15-preview"
+    os.environ["OPENAI_API_BASE"] = st.session_state.openai_api_base
+    os.environ["OPENAI_API_KEY"] = st.session_state.openai_api_key
 
     uploaded_files = st.file_uploader("Upload a PDF or TXT Document", type=[
                                       "pdf", "txt"], accept_multiple_files=True)
