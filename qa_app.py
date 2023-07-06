@@ -215,12 +215,12 @@ def main():
         # os.environ["OPENAI_API_KEY"] = st.session_state.openai_api_key
     
     if 'openai_api_key' not in st.session_state:
-        st.session_state.openai_api_key = openai_api_key
-        os.environ["OPENAI_API_KEY"] = openai_api_key
+        st.session_state.openai_api_key = st.secrets["OPENAI_API_KEY"]
+        # os.environ["OPENAI_API_KEY"] = st.session_state.openai_api_key
 
     if 'openai_api_base' not in st.session_state:
-        st.session_state.openai_api_base = openai_api_base
-        os.environ["OPENAI_API_BASE"] = openai_api_base
+        st.session_state.openai_api_base = st.secrets["OPENAI_API_BASE"]
+        # os.environ["OPENAI_API_BASE"] = st.session_state.openai_api_base
     
     if 'openai_api_type' not in st.session_state:
         st.session_state.openai_api_type = "azure"
